@@ -1,6 +1,5 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useDeferredValue, useCallback, useRef } from 'react';
 import { useVirtualScroll } from './hooks/useVirtualScroll';
-import { useDebounce } from './hooks/useDebounce';
 import VirtualList from './components/VirtualList';
 import SearchBar from './components/SearchBar';
 
@@ -10,7 +9,7 @@ const TOTAL_RECORDS = 50000;
 
 export default function App() {
   const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 300);
+  const debouncedSearch = useDeferredValue(search);
   const scrollRef = useRef(null);
 
   const {
@@ -37,10 +36,6 @@ export default function App() {
         <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#64ffda', margin: 0 }}>
           Virtual Scroll Demo
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '14px', margin: '8px 0 0' }}>
-          Rendering {TOTAL_RECORDS.toLocaleString()} clinical records using Angular CDK-inspired virtual scrolling.
-          Only ~{Math.ceil(VIEWPORT_HEIGHT / ROW_HEIGHT) + 20} DOM nodes exist at any time.
-        </p>
       </header>
 
       <SearchBar

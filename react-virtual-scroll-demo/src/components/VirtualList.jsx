@@ -1,6 +1,5 @@
 /**
  * VirtualList — renders only visible rows from a large dataset.
- * Demonstrates the virtual scrolling pattern used in the clinical research platform.
  */
 
 export default function VirtualList({ items, totalCount, visibleStart, visibleEnd, rowHeight, totalHeight, onScroll, loading }) {
